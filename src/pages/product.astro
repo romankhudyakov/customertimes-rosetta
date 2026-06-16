@@ -1,0 +1,130 @@
+---
+import Base from '../layouts/Base.astro';
+
+const phases = [
+  {
+    n: '01',
+    title: 'Connect',
+    body: 'Read-only OAuth into the source Salesforce org. Optional connection to Event Monitoring for 90-day event-log mining. Takes minutes; no data leaves your tenant boundary unless you authorize it.',
+    tags: ['OAuth', 'Read-only', 'NDA-friendly']
+  },
+  {
+    n: '02',
+    title: 'Ingest',
+    body: 'Rosetta pulls the org\'s metadata catalog and (optionally) anonymized event-log slices. Builds a normalized dependency graph: every Apex class → flow → field → object → layout → integration link, scored by blast radius.',
+    tags: ['Metadata catalog', 'Event log', 'Dependency graph']
+  },
+  {
+    n: '03',
+    title: 'Analyze',
+    body: 'Twelve specialist agents run in parallel — code quality, tech debt, automation conflict, integration architecture, security posture, governor headroom, license rightsize, process mining, dependency hotspots, custom object hygiene, flow risk, and a synthesizer that produces the Executive Brief.',
+    tags: ['12 specialist agents', 'Industry-calibrated', 'BYO LLM via Cursor']
+  },
+  {
+    n: '04',
+    title: 'Report',
+    body: 'Renders to a multi-document deliverable: exec brief, technical playbooks, and a JIRA-ready backlog. Reports are versioned (initial, delta1, delta7…) so subsequent scans become diffs, not duplicates.',
+    tags: ['12 reports', 'Versioned', 'JIRA-ready']
+  },
+  {
+    n: '05',
+    title: 'Scope',
+    body: 'The Discovery layer hands its findings to the Delivery layer. The Scope Builder turns the prioritized backlog into a defensible SOW — work breakdown, effort estimate, named risks, dependencies. Approve it; it becomes the contract.',
+    tags: ['Scope Builder', 'AI SOW', 'Carry-forward crosswalk']
+  },
+  {
+    n: '06',
+    title: 'Configure',
+    body: 'The Configuration Template lands in Cursor as a structured workspace. Rosetta executes CLI-driven configuration — Apex, Flows, Permissions, Layouts, Validations — every change as a reviewable diff. The Implementation Playbook governs sequencing.',
+    tags: ['CLI', 'MCP', 'Diff-reviewed']
+  },
+  {
+    n: '07',
+    title: 'Validate',
+    body: 'UAT Tracker auto-generates test scenarios from the Scope Builder. Defects round-trip back to Cursor as named tickets. Configuration changes apply cleanly to the sandbox, then promote to production behind a release gate.',
+    tags: ['UAT Tracker', 'Auto test scenarios', 'Release gate']
+  },
+  {
+    n: '08',
+    title: 'Hand off',
+    body: 'Rosetta generates a Training Guide auto-tailored to the org\'s actual configuration — not a generic doc set, but a runbook for the build that just shipped. Then the Continuous Monitoring loop starts: delta scans, drift detection, weekly briefs.',
+    tags: ['Auto Training Guide', 'Delta scans', 'Drift detection']
+  }
+];
+---
+<Base
+  active="product"
+  title="Rosetta — Product"
+  description="How Rosetta works end-to-end: from read-only org connection through the eight-phase delivery loop, built on Cursor."
+>
+
+<header class="hero" style="padding-bottom:80px">
+  <div class="container">
+    <div class="hero-tagline mono">$ rosetta --help<span class="blink"></span></div>
+    <h1>The <span class="grad">end-to-end delivery loop</span>, not a discovery tool.</h1>
+    <p class="lede">Rosetta runs an eight-phase loop from read-only org connect through hand-off. Every phase carries decisions forward to the next; nothing is rebuilt from scratch. The whole loop runs on Cursor and is delivered by Customertimes.</p>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">The eight phases</div>
+      <h2>Connect → Ingest → Analyze → Report → Scope → Configure → Validate → Hand off.</h2>
+      <p>The loop is the product. Every step is automated by an AI agent; every step is reviewed by a human; every decision flows into the next step via a versioned crosswalk so nothing gets lost in translation between discovery and delivery.</p>
+    </div>
+    <div class="grid-2">
+      {phases.map(p => (
+        <div class="card">
+          <div class="icon">{p.n}</div>
+          <h3>{p.title}</h3>
+          <p>{p.body}</p>
+          <div class="tags">
+            {p.tags.map(t => <span class="tag">{t}</span>)}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">The substrate</div>
+      <h2>Why this runs on Cursor.</h2>
+      <p>Sweep, Hubbl, Swantide, Saltbox — every competitor built their own IDE-style surface. They have to keep building it, defending it, monetizing it. Rosetta took the opposite bet: ride the most rapidly-advancing AI dev environment in the industry. Cursor's roadmap becomes ours. MCP servers become ours. New models become ours the day they ship.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="icon">M</div>
+        <h3>Model Context Protocol</h3>
+        <p>Salesforce, Snowflake, Jira, GitHub — as first-class MCP servers. New integrations land as new MCP servers, not new product code.</p>
+      </div>
+      <div class="card">
+        <div class="icon">⌘</div>
+        <h3>BYO LLM</h3>
+        <p>Claude, GPT, Gemini, or a private model. Switchable per task, per workspace. No model lock-in.</p>
+      </div>
+      <div class="card">
+        <div class="icon">Δ</div>
+        <h3>Diff-reviewed change</h3>
+        <p>Every Rosetta-proposed configuration change is a reviewable patch. Approve, edit, reject — at developer-grade trust level, not click-ops blind faith.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="cta-band band">
+  <div class="container">
+    <div class="eyebrow" style="color:#fff;opacity:.9">Next step</div>
+    <h2>Run the loop on one of your orgs.</h2>
+    <p>The first scan is the cheapest way to find out whether the rest of the loop is worth running. Read-only, four hours, twelve reports.</p>
+    <div class="ctas">
+      <a class="btn btn-primary" href="mailto:rosetta@customertimes.com?subject=Rosetta%20%E2%80%94%20Request%20a%20scan">Book a scan</a>
+      <a class="btn btn-ghost" href="/features/">See the use cases →</a>
+    </div>
+  </div>
+</section>
+
+</Base>

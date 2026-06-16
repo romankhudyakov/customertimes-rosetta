@@ -1,0 +1,62 @@
+---
+import Base from '../layouts/Base.astro';
+import { reports } from '../data/reports';
+---
+<Base
+  active="outputs"
+  title="Rosetta — Sample outputs"
+  description="Browse sanitized excerpts from the twelve reports Rosetta produces in a single scan."
+>
+
+<header class="hero" style="padding-bottom:80px">
+  <div class="container">
+    <div class="hero-tagline mono">$ ls reports/<span class="blink"></span></div>
+    <h1>Twelve reports. <span class="grad">Sanitized real outputs.</span></h1>
+    <p class="lede">These are real reports from real scans, with customer names redacted. Click any title to read the excerpt; the actual reports are longer and include named offenders, dependency graphs, and a JIRA-ready backlog.</p>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <div class="report-gallery">
+      <div class="report-list" id="report-list">
+        {reports.map((r, i) => (
+          <button data-id={r.id} class={i === 0 ? 'active' : ''}>
+            <span class="num">{r.num}</span>
+            <span>{r.title}</span>
+          </button>
+        ))}
+      </div>
+      <div class="report-pane">
+        <div class="report-tabs">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span class="title mono" id="report-filename">rosetta-report-01.md</span>
+        </div>
+        <div class="report-body" id="report-body"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="cta-band band">
+  <div class="container">
+    <h2>Get your own bundle.</h2>
+    <p>The first scan is read-only and four hours from OAuth to delivered reports.</p>
+    <div class="ctas">
+      <a class="btn btn-primary" href="mailto:rosetta@customertimes.com?subject=Rosetta%20%E2%80%94%20Request%20a%20scan">Book a scan</a>
+    </div>
+  </div>
+</section>
+
+<script type="application/json" id="rosetta-reports-data" set:html={JSON.stringify(reports)}></script>
+<script is:inline>
+(function(){
+  try {
+    const el = document.getElementById('rosetta-reports-data');
+    if (el) window.__ROSETTA_REPORTS__ = JSON.parse(el.textContent);
+  } catch(e) {}
+})();
+</script>
+<script type="module" src="/scripts/home.js"></script>
+
+</Base>

@@ -1,0 +1,55 @@
+---
+import Base from '../layouts/Base.astro';
+import { useCases } from '../data/useCases';
+---
+<Base
+  active="features"
+  title="Rosetta — Features by use case"
+  description="Eight Rosetta use cases — from inherited org audit through continuous monitoring. Each maps to a real artifact set."
+>
+
+<header class="hero" style="padding-bottom:80px">
+  <div class="container">
+    <div class="hero-tagline mono">$ rosetta features --by use-case<span class="blink"></span></div>
+    <h1>Eight ways <span class="grad">Rosetta earns its place</span> on your team.</h1>
+    <p class="lede">Each card maps to a real artifact set already shipping in client engagements. Pick the one that fits where you are right now; the rest become available as you move through the loop.</p>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    {useCases.map(uc => (
+      <div id={uc.id} class="card" style="margin-bottom:22px;padding:36px;display:grid;grid-template-columns:1fr 1.4fr;gap:36px;align-items:start">
+        <div>
+          <div class="who mono" style="font-size:.78rem;color:var(--brand-bright);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px">{uc.who}</div>
+          <h3 style="font-size:1.6rem;color:#fff;margin-bottom:14px">{uc.num} · {uc.title}</h3>
+          <div class="meta" style="display:grid;gap:8px;margin-top:18px;font-family:var(--mono);font-size:.86rem;color:#9DA8C7">
+            <div><b style="color:#fff">In:</b> {uc.input}</div>
+            <div><b style="color:#fff">Out:</b> {uc.output}</div>
+          </div>
+        </div>
+        <div>
+          <p style="color:#C7D0EC;font-size:1.02rem;margin-bottom:18px">{uc.pitch}</p>
+          <h4 style="font-family:var(--mono);font-size:.78rem;color:var(--brand-bright);letter-spacing:.12em;text-transform:uppercase;margin:0 0 12px;font-weight:600">What ships</h4>
+          <ul style="margin:0;padding-left:18px;color:#C7D0EC">
+            {uc.outcomes.map(o => <li style="margin-bottom:6px">{o}</li>)}
+          </ul>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<section id="contact" class="cta-band band">
+  <div class="container">
+    <div class="eyebrow" style="color:#fff;opacity:.9">Pick one</div>
+    <h2>Start with whichever use case is bleeding today.</h2>
+    <p>The rest will become obvious once the first scan returns. We size the engagement around the use case, not the other way around.</p>
+    <div class="ctas">
+      <a class="btn btn-primary" href="mailto:rosetta@customertimes.com?subject=Rosetta%20%E2%80%94%20Use%20case">Talk to us</a>
+      <a class="btn btn-ghost" href="/outputs/">See sample outputs →</a>
+    </div>
+  </div>
+</section>
+
+</Base>

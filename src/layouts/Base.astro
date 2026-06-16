@@ -1,0 +1,89 @@
+---
+import '../styles/global.css';
+import Logo from '../components/Logo.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  active?: 'home' | 'product' | 'features' | 'outputs' | 'cursor';
+}
+const {
+  title = "Rosetta — We speak your org's language",
+  description = "The AI-native Salesforce delivery stack. From org discovery through deploy, on Cursor — run by Customertimes.",
+  active = 'home',
+} = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content="website" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+<nav class="nav">
+  <div class="container nav-row">
+    <a href="/" class="brand">
+      <span class="logo-wrap" aria-hidden="true"><Logo /></span>
+      <span class="name">Rosetta</span>
+      <span class="tag">by Customertimes</span>
+    </a>
+    <div class="nav-links">
+      <a href="/" class={active === 'home' ? 'active' : ''}>Home</a>
+      <a href="/product/" class={active === 'product' ? 'active' : ''}>Product</a>
+      <a href="/features/" class={active === 'features' ? 'active' : ''}>Features</a>
+      <a href="/outputs/" class={active === 'outputs' ? 'active' : ''}>Outputs</a>
+      <a href="/#cursor" class="">Cursor</a>
+      <a href="/#contact" class="nav-cta">Book a scan →</a>
+    </div>
+  </div>
+</nav>
+
+<slot />
+
+<footer>
+  <div class="container">
+    <div>
+      <div class="brand-blk">
+        <span class="logo-wrap"><Logo size={18} /></span>
+        <b>Rosetta</b>
+      </div>
+      <div class="tag-blk">We speak your org's language.</div>
+      <div class="tag-blk" style="margin-top:8px">Built on Cursor. Run by Customertimes.</div>
+    </div>
+    <div>
+      <h5>Product</h5>
+      <a href="/product/">Architecture</a>
+      <a href="/outputs/">Sample Outputs</a>
+      <a href="/#cursor">Cursor Partnership</a>
+      <a href="/#comparator">vs. Competitors</a>
+    </div>
+    <div>
+      <h5>Features</h5>
+      <a href="/features/#audit">Inherited Org Audit</a>
+      <a href="/features/#tech-debt">Tech Debt</a>
+      <a href="/features/#process-mining">Process Mining</a>
+      <a href="/features/#implementation">Implementation</a>
+    </div>
+    <div>
+      <h5>Customertimes</h5>
+      <a href="https://customertimes.com" target="_blank" rel="noopener">customertimes.com</a>
+      <a href="/#contact">Contact</a>
+      <a href="mailto:rosetta@customertimes.com">rosetta@customertimes.com</a>
+    </div>
+    <div class="legal">
+      <div>© {new Date().getFullYear()} Customertimes. Rosetta is a Customertimes product.</div>
+      <div class="mono">v0.1 · preview</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
