@@ -20,7 +20,7 @@ export const reports: Report[] = [
     category: 'Strategy',
     grade: 'B · 78/100',
     gradeClass: 'ok',
-    meta: 'Generated · Initial scan · Sample Org · Higher Ed / Nonprofit',
+    meta: 'Generated · Initial scan · Sample Org',
     body: `
       <p><b>The Sample Org's Salesforce org earns a solid B (78/100) overall</b>, with standout performance in security, automation, and process discipline — a strong operational foundation. However, two critical gaps are actively costing money and staff productivity today:</p>
       <ul>
@@ -52,10 +52,9 @@ export const reports: Report[] = [
     num: '03',
     title: 'Business Process Mining',
     category: 'Operations',
-    meta: 'Generated · 90-day window · Industry auto-detected: Nonprofit / Scholarship',
+    meta: 'Generated · 90-day event-log window · BPMN + CMMI',
     body: `
-      <p><b>⚠ Industry auto-calibration:</b> The data reveals this is almost certainly a nonprofit / scholarship-granting organization, not a commercial sales org. Key signals: case subjects are "Scholarship Report"; lead sources include "Constituent"; opportunity "win rate" of 98.6% reflects grant approvals, not commercial closings. <b>All benchmarks in this report are calibrated for a nonprofit CRM context.</b></p>
-      <p><b>The single binding constraint</b> in this org is the <code>Contact Report Submitted</code> approval stage: 200 pending approvals, average 489 days. By the Theory of Constraints, every other improvement is subordinated to breaking this constraint first.</p>
+      <p><b>The single binding constraint</b> in this org is a long-running approval stage: 200 pending approvals, average 489 days. By the Theory of Constraints, every other improvement is subordinated to breaking this constraint first.</p>
       <p><b>Priority queue:</b></p>
       <ul>
         <li>🔴 <b>Opportunity Pipeline</b> — 81,491 open records, 81,488 stuck (99.99% stuck rate), $1.18B+ pipeline immobilized</li>
@@ -75,7 +74,7 @@ export const reports: Report[] = [
     meta: 'Generated · 659 Apex classes scanned · v27–v63 API range',
     body: `
       <p>Among 659 Apex classes, <b>50+ are confirmed below API v55</b> — with an alarming tail stretching back to v27 (<code>AdHoc</code>), v28 (Stripe family), and v32 (a third-party scoring package with ~80 classes).</p>
-      <p><b>Critical custom classes</b> supporting giving and alumni portal operations carry <b>0% test coverage</b> and are at least 12 API versions stale.</p>
+      <p><b>Critical custom classes</b> supporting customer-facing portal operations carry <b>0% test coverage</b> and are at least 12 API versions stale.</p>
       <p>On the trigger side, <code>secureFieldUpdateDDP</code> (v16) and <code>ddpFileUpdateDDP</code> / <code>cioUpdateDDP</code> (v18) are ancient document-generation triggers that are 47 versions behind.</p>
       <p><b>Contact has 3 separate Apex triggers</b> — violating the one-trigger-per-object principle. Trigger execution order is non-deterministic and any new developer will spend hours debugging phantom failures.</p>
       <p><b>23 inactive Flows</b> clutter Setup. <b>All 123 flows lack descriptions</b>, making governance tribal knowledge. <b>5 flows run in System Mode without Sharing</b> — each is a potential privilege-escalation vector if invoked from a community context.</p>
@@ -143,7 +142,7 @@ export const reports: Report[] = [
     body: `
       <p>Of 240 paid Salesforce Platform licenses, <b>67 users have not logged in for 90+ days</b>. Rightsizing alone returns an estimated $200K+ annually.</p>
       <p><b>Storage:</b> 312 GB total — 41 GB sits in 4 deprecated custom objects that no longer have UI exposure. Archival saves recurring storage cost and reduces backup window.</p>
-      <p><b>Governor headroom:</b> Daily Async Apex job consumption is at 78% of limit. The <code>PORTAL_BATCH_NewsletterFilter</code> alone consumes 23% of daily SOQL queries. One additional batch workload during peak hours would breach the limit and silently kill the alumni mail flow.</p>
+      <p><b>Governor headroom:</b> Daily Async Apex job consumption is at 78% of limit. The <code>PORTAL_BATCH_NewsletterFilter</code> alone consumes 23% of daily SOQL queries. One additional batch workload during peak hours would breach the limit and silently kill a customer-facing mail flow.</p>
       <p><b>API call volume:</b> 89% of daily limit, of which 41% is the polling integration pattern flagged in the Integration report. Moving to Platform Events would free ~30% of daily API budget.</p>
     `,
   },
